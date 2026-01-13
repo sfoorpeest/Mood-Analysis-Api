@@ -18,3 +18,14 @@ class MoodAnalyzer:
             "emotion": result["label"].lower(),
             "confidence": result["score"]
         }
+
+
+# Module-level analyzer and compatibility wrapper
+_analyzer = MoodAnalyzer()
+
+def analyze_sentiment(text: str):
+    """Compatibility wrapper: returns a dict with `label` and `score` keys
+    to match older code that imports `analyze_sentiment`.
+    """
+    res = _analyzer.analyze(text)
+    return {"label": res["emotion"], "score": res["confidence"]}
